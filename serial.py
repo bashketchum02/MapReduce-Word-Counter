@@ -6,7 +6,7 @@ def count_words(files, min_length, max_length):
     word_counts = defaultdict(int)
 
     for file in files:
-        with open(file, 'r', encoding='utf-8-sig') as f:
+        with open(file, 'r') as f:
             for line in f:
                 line = line.strip()
                 words = line.split()
