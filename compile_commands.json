@@ -1,0 +1,13 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-I/usr/lib/x86_64-linux-gnu/openmpi/include",
+      "-I/usr/lib/x86_64-linux-gnu/openmpi/include/openmpi",
+      "main.cpp"
+    ],
+    "directory": "/home/bashketchum/school/pp_assignment",
+    "file": "/home/bashketchum/school/pp_assignment/main.cpp"
+  }
+]
