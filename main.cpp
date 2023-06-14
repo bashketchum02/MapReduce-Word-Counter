@@ -52,6 +52,5 @@ int main(){
         }
         new_file.close();
     }
-
     std::cout<<count<<std::endl;
 }

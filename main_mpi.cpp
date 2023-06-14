@@ -1,5 +1,6 @@
 //parallel program
 #include<cctype>
+#include<cstdlib>
 #include<iostream>
 #include<fstream>
 #include<string>
@@ -25,9 +26,34 @@ struct comp{
 std::string serializer(std::map<std::string, int> counter){
     std::string emp_str = "";
     for(auto x : counter){
-        emp_str += (x.first + ": " + std::to_string(x.second) + "\n");
+        emp_str += (x.first + ':' + std::to_string(x.second) + '\n');
     }
+    //std::cout<<emp_str<<std::endl;
     return emp_str;
+}
+
+std::vector<std::string> split (const std::string &s, char delim) {
+    std::vector<std::string> result;
+    std::stringstream ss (s);
+    std::string item;
+
+    while (getline (ss, item, delim)) {
+        result.push_back(item);
+    }
+
+    return result;
+}
+
+void deserializer(std::string buffer, std::map<std::string, int> &out, int &word_count, int min_len, int max_len){
+    std::stringstream ss(buffer);
+    std::string s;
+    while(std::getline(ss, s)){
+        std::vector<std::string> tokens = split(s, ':');
+        if(tokens.size() == 2 && tokens[0].length() >= min_len && tokens[1].length() <= max_len){
+            out[tokens[0]] += std::stoi(tokens[1]);
+            word_count += 1;
+        }
+    } 
 }
 
 std::string str_tolower(std::string s){
@@ -54,6 +80,7 @@ void tokenizer(std::string const &str, const char separator, std::map<std::strin
 int main(int argc, char **argv){
     //MPI INIT
     int rank, size;
+    int word_counter = 0;
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
@@ -115,45 +142,61 @@ int main(int argc, char **argv){
     }
     MPI_Bcast(&line_count, 1, MPI_INT, 0, MPI_COMM_WORLD);
     //std::cout<<line_count<<std::endl;
-    char temp[1000];
     int count = 0;
     for(int i = 0; i < line_count; i++){
         if(!rank){
             //std::cout<<i%(size-1) + 1<<std::endl;
-            MPI_Send(rank_0_lines[i].c_str(), 1000, MPI_CHAR, i%(size-1)+1, 0, MPI_COMM_WORLD);
+            int line_len = rank_0_lines[i].length();
+            MPI_Send(&line_len, 1, MPI_INT, i%(size-1)+1, 0, MPI_COMM_WORLD);
+            MPI_Send(rank_0_lines[i].c_str(), line_len, MPI_CHAR, i%(size-1)+1, 0, MPI_COMM_WORLD);
         }
         else{
             if(rank && (i%(size-1) + 1) == rank){
-                MPI_Recv(&temp, 1000, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                int line_len;
+                MPI_Recv(&line_len, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                char temp[line_len+1];
+                MPI_Recv(temp, 1000, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 std::string inp(temp);
                 tokenizer(str_tolower(inp), ' ', words, word_length_min, word_length_max, count);
             }
         }
     }
-    char huge_buffer[1000000];
-    //send all the buffers to rank 0 
+
+    int buffer_sz;
+    std::string buf = serializer(words);
+    //std::cout<<buf<<std::endl;
     if(!rank){
         for(int i = 1; i < size; i++){
-            MPI_Recv(&huge_buffer, 10000000, MPI_CHAR, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-            std::cout<<huge_buffer<<std::endl;
+            MPI_Recv(&buffer_sz, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            char buffer[buffer_sz+1];
+            MPI_Recv(&buffer, buffer_sz, MPI_CHAR, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            std::string s(buffer);
+            deserializer(s, words, word_counter, word_length_min, word_length_max);
         }
     }
-    if(rank){
-        std::string buf = serializer(words);
-        MPI_Send(buf.c_str(), 10000000, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
-    }
-        
+    else{ 
+        buffer_sz = buf.length();
+        MPI_Send(&buffer_sz, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+        //std::cout<<buf.c_str()<<std::endl;
+        MPI_Send(buf.c_str(), buffer_sz, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
+    }   
     //tokenizer(str_tolower(message), ' ', words, word_length_min, word_length_max);
-    //freopen("output_log.txt", "w", stdout);    
-    /*if(order == 'a'){
-        std::cout<<"Word Count Report (Alphabetical Order):"<<std::endl;
-        for(auto x : words){
-            std::cout<<x.first<<": "<<x.second<<std::endl;
+    if(!rank){
+        freopen("output_log_parallel.txt", "w", stdout);    
+        if(order == 'a'){
+            std::cout<<"Word Count Report (Alphabetical Order):"<<std::endl;
+            for(auto x : words){
+                std::cout<<x.first<<": "<<x.second<<std::endl;
+            }
         }
+        else{
+            std::cout<<"Word Count Report (Number of Words Order):"<<std::endl;
+            std::set<std::pair<std::string, int>, comp> answers(words.begin(), words.end());
+            for(auto x : answers){
+                std::cout<<x.first<<": "<<x.second<<std::endl;
+            }
+        }
+        std::cout<<"Total words : "<<word_counter<<std::endl;
     }
-    else{
-        std::cout<<"Word Count Report (Number of Words Order):"<<std::endl;
-        std::set<std::pair<std::string, int>, comp> answers(words.begin(), words.end());
-    }*/
     MPI_Finalize();
 }
