@@ -150,14 +150,14 @@ int main(int argc, char **argv){
             //std::cout<<i%(size-1) + 1<<std::endl;
             int line_len = rank_0_lines[i].length();
             MPI_Send(&line_len, 1, MPI_INT, i%(size-1)+1, 0, MPI_COMM_WORLD);
-            MPI_Send(rank_0_lines[i].c_str(), line_len, MPI_CHAR, i%(size-1)+1, 0, MPI_COMM_WORLD);
+            MPI_Send(rank_0_lines[i].c_str(), line_len+1, MPI_CHAR, i%(size-1)+1, 0, MPI_COMM_WORLD);
         }
         else{
             if(rank && (i%(size-1) + 1) == rank){
                 int line_len;
                 MPI_Recv(&line_len, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 char temp[line_len+1];
-                MPI_Recv(temp, line_len, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                MPI_Recv(temp, line_len+1, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 std::string inp(temp);
                 tokenizer(str_tolower(inp), ' ', words, word_length_min, word_length_max, count);
             }
@@ -171,7 +171,7 @@ int main(int argc, char **argv){
         for(int i = 1; i < size; i++){
             MPI_Recv(&buffer_sz, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
             char buffer[buffer_sz+1];
-            MPI_Recv(&buffer, buffer_sz, MPI_CHAR, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            MPI_Recv(&buffer, buffer_sz+1, MPI_CHAR, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
             std::string s(buffer);
             deserializer(s, words, word_counter, word_length_min, word_length_max);
         }
@@ -180,7 +180,7 @@ int main(int argc, char **argv){
         buffer_sz = buf.length();
         MPI_Send(&buffer_sz, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
         //std::cout<<buf.c_str()<<std::endl;
-        MPI_Send(buf.c_str(), buffer_sz, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
+        MPI_Send(buf.c_str(), buffer_sz+1, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
     }
     end = MPI_Wtime();
     //std::cout<<MPI_Wtick()<<std::endl;
