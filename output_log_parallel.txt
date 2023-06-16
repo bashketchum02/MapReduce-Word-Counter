@@ -25664,6 +25664,7 @@ identify: 3
 identical: 3
 idem: 3
 idees: 3
+ich: 3
 ibat: 3
 iailordn: 3
 iachimomen: 3
@@ -33383,6 +33384,7 @@ nowwe: 2
 nowve: 2
 nowuse: 2
 nowus: 2
+nowu: 2
 nowthis: 2
 nowthere: 2
 nowth: 2
@@ -35663,7 +35665,6 @@ idealism: 2
 idalian: 2
 iconoclast: 2
 ichabod: 2
-ich: 2
 icedrop: 2
 iby: 2
 ibut: 2
@@ -36868,7 +36869,7 @@ fowre: 2
 fowlh: 2
 fowle: 2
 foutre: 2
-fourthv: 2
+fourthu: 2
 fourfooted: 2
 foure: 2
 fountainlighted: 2
@@ -40623,6 +40624,7 @@ argiphont: 2
 arginousai: 2
 argier: 2
 argentine: 2
+areu: 2
 areso: 2
 arer: 2
 arene: 2
@@ -47387,7 +47389,7 @@ venicet: 1
 venicepresentlyue: 1
 veniceows: 1
 veniceless: 1
-venicekv: 1
+veniceku: 1
 venicehence: 1
 venicefor: 1
 veniceet: 1
@@ -52993,7 +52995,7 @@ thirdndd: 1
 thirdnay: 1
 thirdmed: 1
 thirdling: 1
-thirdkv: 1
+thirdku: 1
 thirdh: 1
 thirdee: 1
 thirdborough: 1
@@ -55186,7 +55188,7 @@ taleo: 1
 talentsyw: 1
 talentsswore: 1
 talented: 1
-talengrv: 1
+talengru: 1
 taleng: 1
 talelip: 1
 talelf: 1
@@ -62040,7 +62042,7 @@ shriekm: 1
 shriekings: 1
 shriekingly: 1
 shriekingare: 1
-shrewv: 1
+shrewu: 1
 shrewsburys: 1
 shrewsburyry: 1
 shrewsburylph: 1
@@ -62750,8 +62752,8 @@ shalimshah: 1
 shales: 1
 shal: 1
 shaket: 1
-shakespearev: 1
-shakespearelv: 1
+shakespearemu: 1
+shakespearedv: 1
 shakespear: 1
 shakesoh: 1
 shakesise: 1
@@ -67079,8 +67081,8 @@ restsin: 1
 restse: 1
 restsay: 1
 restrung: 1
-restrictionsu: 1
 restrictionsthout: 1
+restrictionslu: 1
 restrictionmaybe: 1
 restriction: 1
 restraintnio: 1
@@ -77531,7 +77533,7 @@ oneday: 1
 onedar: 1
 onects: 1
 oneck: 1
-onecev: 1
+oneceu: 1
 oneby: 1
 onebuy: 1
 onebenched: 1
@@ -78818,10 +78820,8 @@ nowwail: 1
 noww: 1
 nowvery: 1
 nowved: 1
-nowv: 1
 nowurs: 1
 nowur: 1
-nowu: 1
 nowtyy: 1
 nowty: 1
 nowtwas: 1
@@ -79179,7 +79179,7 @@ nothingswe: 1
 nothingsins: 1
 nothingsby: 1
 nothingsad: 1
-nothingrv: 1
+nothingru: 1
 nothingreer: 1
 nothingre: 1
 nothingrd: 1
@@ -86509,7 +86509,7 @@ lucretiaave: 1
 lucres: 1
 lucrejustified: 1
 lucreces: 1
-lucrecerdkv: 1
+lucrecerdku: 1
 lucrative: 1
 luckys: 1
 lucksi: 1
@@ -89125,7 +89125,7 @@ leashes: 1
 leashed: 1
 leashd: 1
 leasene: 1
-learv: 1
+learu: 1
 learnwould: 1
 learnwho: 1
 learnwhere: 1
@@ -90602,7 +90602,7 @@ kirtles: 1
 kirke: 1
 kinwhat: 1
 kinte: 1
-kinsmenwv: 1
+kinsmenwu: 1
 kinsmanork: 1
 kinsmanlth: 1
 kinsmane: 1
@@ -93669,7 +93669,7 @@ incredibly: 1
 incredibili: 1
 increasingly: 1
 increaseumbp: 1
-increaserv: 1
+increaseru: 1
 increaseout: 1
 increasek: 1
 increasein: 1
@@ -108678,7 +108678,7 @@ erste: 1
 ersed: 1
 errours: 1
 erroryou: 1
-errorsu: 1
+errorslu: 1
 errorreason: 1
 errorr: 1
 errorone: 1
@@ -110129,7 +110129,7 @@ eightpenny: 1
 eightn: 1
 eightline: 1
 eightie: 1
-eighthrkv: 1
+eighthrku: 1
 eighteenpence: 1
 eighteene: 1
 eighndnd: 1
@@ -114110,7 +114110,7 @@ dennyshe: 1
 dennylone: 1
 dennye: 1
 dennisudrey: 1
-denmarkv: 1
+denmarku: 1
 denmarkt: 1
 denmarke: 1
 denmarkark: 1
@@ -114496,7 +114496,7 @@ defameht: 1
 defamed: 1
 defalcation: 1
 defacing: 1
-defacev: 1
+defaceu: 1
 defacers: 1
 defacer: 1
 defacedee: 1
@@ -117751,7 +117751,7 @@ contentway: 1
 contentur: 1
 contenttter: 1
 contentthe: 1
-contentsv: 1
+contentsu: 1
 contentstyh: 1
 contentsther: 1
 contentstes: 1
@@ -119584,7 +119584,6 @@ clepsydram: 1
 clepeth: 1
 clepes: 1
 clepe: 1
-cleopatrav: 1
 cleopatraus: 1
 cleopatraup: 1
 cleopatrauck: 1
@@ -119593,6 +119592,7 @@ cleopatraten: 1
 cleopatrart: 1
 cleopatraom: 1
 cleopatrama: 1
+cleopatralmu: 1
 cleopatrair: 1
 cleopatraim: 1
 cleopatraied: 1
@@ -125679,7 +125679,7 @@ beyondbut: 1
 beyet: 1
 beyeaof: 1
 bewy: 1
-bewv: 1
+bewu: 1
 bewtienn: 1
 bewrays: 1
 bewraying: 1
@@ -126760,7 +126760,7 @@ beforences: 1
 beforemy: 1
 beforem: 1
 beforely: 1
-beforelv: 1
+beforelu: 1
 beforelown: 1
 beforeloud: 1
 beforelace: 1
@@ -129800,12 +129800,10 @@ areye: 1
 arewh: 1
 arewere: 1
 arew: 1
-arev: 1
 areuse: 1
 areuls: 1
 areuld: 1
 areue: 1
-areu: 1
 aretw: 1
 aretiney: 1
 aretinesd: 1

@@ -49,7 +49,7 @@ void deserializer(std::string buffer, std::map<std::string, int> &out, int &word
     std::string s;
     while(std::getline(ss, s)){
         std::vector<std::string> tokens = split(s, ':');
-        if(tokens.size() == 2 && tokens[0].length() >= min_len && tokens[1].length() <= max_len){
+        if(tokens.size() == 2 && (tokens[0].length() >= min_len) && (tokens[0].length() <= max_len)){
             out[tokens[0]] += std::stoi(tokens[1]);
             word_count += 1;
         }
@@ -183,9 +183,9 @@ int main(int argc, char **argv){
         MPI_Send(buf.c_str(), buffer_sz, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
     }
     end = MPI_Wtime();
-    std::cout<<MPI_Wtick()<<std::endl;
+    //std::cout<<MPI_Wtick()<<std::endl;
     double time = (end - start)*MPI_Wtick();
-    printf("Time : %.9f seconds\n", time);
+    printf("Execution time for rank %d : %.9f seconds\n", rank, time);
 
     //tokenizer(str_tolower(message), ' ', words, word_length_min, word_length_max);
     if(!rank){
