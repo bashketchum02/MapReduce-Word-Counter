@@ -80,12 +80,14 @@ void tokenizer(std::string const &str, const char separator, std::map<std::strin
 int main(int argc, char **argv){
     //MPI INIT
     int rank, size;
+    double start, end;
     int word_counter = 0;
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 	int num_txt_files, word_length_min, word_length_max;
     char order;
+    start = MPI_Wtime();
     if(rank == 0){
         std::cout<<"Enter the number of text files: ";
         std::cin>>num_txt_files;
@@ -155,7 +157,7 @@ int main(int argc, char **argv){
                 int line_len;
                 MPI_Recv(&line_len, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 char temp[line_len+1];
-                MPI_Recv(temp, 1000, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                MPI_Recv(temp, line_len, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 std::string inp(temp);
                 tokenizer(str_tolower(inp), ' ', words, word_length_min, word_length_max, count);
             }
@@ -179,7 +181,12 @@ int main(int argc, char **argv){
         MPI_Send(&buffer_sz, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
         //std::cout<<buf.c_str()<<std::endl;
         MPI_Send(buf.c_str(), buffer_sz, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
-    }   
+    }
+    end = MPI_Wtime();
+    std::cout<<MPI_Wtick()<<std::endl;
+    double time = (end - start)*MPI_Wtick();
+    printf("Time : %.9f seconds\n", time);
+
     //tokenizer(str_tolower(message), ' ', words, word_length_min, word_length_max);
     if(!rank){
         freopen("output_log_parallel.txt", "w", stdout);    
