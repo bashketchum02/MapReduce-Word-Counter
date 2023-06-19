@@ -182,11 +182,11 @@ int main(int argc, char **argv){
         //std::cout<<buf.c_str()<<std::endl;
         MPI_Send(buf.c_str(), buffer_sz+1, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
     }
+    MPI_Barrier(MPI_COMM_WORLD);
     end = MPI_Wtime();
     //std::cout<<MPI_Wtick()<<std::endl;
     double time = (end - start)*MPI_Wtick();
     printf("Execution time for rank %d : %.9f seconds\n", rank, time);
-
     //tokenizer(str_tolower(message), ' ', words, word_length_min, word_length_max);
     if(!rank){
         freopen("output_log_parallel.txt", "w", stdout);    
@@ -203,7 +203,6 @@ int main(int argc, char **argv){
                 std::cout<<x.first<<": "<<x.second<<std::endl;
             }
         }
-        std::cout<<"Total words : "<<word_counter<<std::endl;
     }
     MPI_Finalize();
 }

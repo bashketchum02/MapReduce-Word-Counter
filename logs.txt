@@ -1,3 +1,0 @@
-Parallel total : 1736561
-Dr Ian Serial : 1727862
-C++ Serial : 1727389

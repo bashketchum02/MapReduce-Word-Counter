@@ -1,6 +1,7 @@
 //parallel program
 //#include <bits/chrono.h>
 #include<cctype>
+#include <ctime>
 #include<iostream>
 #include<fstream>
 #include<string>
@@ -53,7 +54,8 @@ int main(int argc, char **argv){
 	int num_txt_files, word_length_min, word_length_max;
     char order;
     int count = 0;
-    auto start = std::chrono::high_resolution_clock::now();
+    clock_t start, end;
+    start = clock();
     std::cout<<"Enter the number of text files: ";
     std::cin>>num_txt_files;
     std::vector<std::string> file_list(num_txt_files);
@@ -80,9 +82,9 @@ int main(int argc, char **argv){
             new_file.close();
         }
     }
-    std::cout<<count<<std::endl;
-    auto end = std::chrono::high_resolution_clock::now();
-    std::cout<<"Time : "<<std::chrono::duration_cast<std::chrono::seconds>(end - start).count()<<" seconds"<<std::endl;
+    end = clock();
+    double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
+    std::cout<<"Time : "<<time_taken<<" seconds"<<std::endl;
     freopen("output_log_serial.txt", "w", stdout);    
     if(order == 'a'){
         std::cout<<"Word Count Report (Alphabetical Order):"<<std::endl;
@@ -94,7 +96,7 @@ int main(int argc, char **argv){
         std::cout<<"Word Count Report (Number of Words Order):"<<std::endl;
         std::set<std::pair<std::string, int>, comp> answers(words.begin(), words.end());
         for(auto x : answers){
-            std::cout<<x.first<<" "<<x.second<<std::endl;
+            std::cout<<x.first<<": "<<x.second<<std::endl;
         }
     }
 }
